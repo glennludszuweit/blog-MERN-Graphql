@@ -1,6 +1,7 @@
 import express from 'express';
 import env from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import { graphqlHTTP } from 'express-graphql';
 import schema from './src/schema.js';
 import { verifyUser } from './src/middlewares/authenticate.js';
@@ -9,7 +10,7 @@ env.config();
 const app = express();
 
 app.use(express.json());
-
+app.use(cors());
 app.use(verifyUser);
 
 app.use(
