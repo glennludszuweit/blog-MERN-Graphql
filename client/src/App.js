@@ -1,26 +1,16 @@
-import { useQuery, gql } from '@apollo/client';
-
-const posts = gql`
-  {
-    getPosts {
-      title
-      body
-      id
-    }
-  }
-`;
+import { Route, Switch } from 'react-router-dom';
+import AddPost from './components/Posts/AddPost';
+import Posts from './components/Posts/Posts';
+import Login from './components/Users/Login';
 
 function App() {
-  const { loading, error, data } = useQuery(posts);
-  const postsData = data.getPosts;
-  console.log(postsData);
-
-  return postsData.map((post) => (
-    <div key={post.id}>
-      <h1>{post.title}</h1>
-      <p>{post.body}</p>
-    </div>
-  ));
+  return (
+    <Switch>
+      <Route path='/addPost' component={AddPost} />
+      <Route path='/login' component={Login} />
+      <Route exact path='/' component={Posts} />
+    </Switch>
+  );
 }
 
 export default App;
